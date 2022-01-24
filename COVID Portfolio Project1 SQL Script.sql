@@ -80,7 +80,7 @@ Order By 2,3
 
 
 
---USE CTE
+-- Using CTE to perform Calculation on Partition By in previous query
 
 with PopVsVac (continent ,location,date,population,New_Vaccination,RollingPeopleVaccination)
 as
@@ -95,8 +95,9 @@ where dea.continent is NOT NULL
  )
 
  select * , (RollingPeopleVaccination /population )*100 from PopVsVac 
-
- --USE TEMP TABLE
+ 
+ 
+-- Using Temp Table to perform Calculation on Partition By in previous query
 
  DROP TABLE IF EXISTS #PercentPopulationVaccinated
 
@@ -116,7 +117,8 @@ ON  dea.location =vac.location and dea.date =vac.date
 
 select * , (RollingPeopleVaccinated /population )*100 from #PercentPopulationVaccinated 
 
- --CREATE VIEW
+
+-- Creating View to store data for later visualizations
 
  CREATE VIEW PercentPopulationVaccinated as 
  select dea.continent ,dea .location,dea.date,dea.population ,vac.new_vaccinations ,
